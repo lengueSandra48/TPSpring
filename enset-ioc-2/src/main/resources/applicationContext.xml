@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id = "dao" class="extension.IDaoImp2"></bean>
+    <bean id = "dao" class="dao.IDaoImpl"></bean>
     <bean id ="metier" class = "metier.MetierImpl">
         <constructor-arg ref="dao"></constructor-arg>
     </bean>
