@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,7 +31,7 @@ public class BankAccountService implements IBankAccounService{
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        log.info("Saving new Customer");
+        //log.info("Saving new Customer");
         Customer savedCustomer = customerRepository.save(customer);
         return savedCustomer;
     }
@@ -91,7 +92,7 @@ public class BankAccountService implements IBankAccounService{
     }
 
     @Override
-    public void debit(String accountId, double amount, String description) throws BankingAccoundNotFoundException, BalanceInsufficientException {
+    public AccountOperation debit(String accountId, double amount, String description) throws BankingAccoundNotFoundException, BalanceInsufficientException {
         BankAccount bankAccount = getBankAccount(accountId);
         if (bankAccount.getBalance() < amount){
             throw new BalanceInsufficientException("Your balance is insufficient");
@@ -108,6 +109,7 @@ public class BankAccountService implements IBankAccounService{
         bankAccount.setBalance(bankAccount.getBalance() - amount);
         bankAccountRepository.save(bankAccount);
 
+        return accountOperation;
     }
 
     @Override
@@ -141,4 +143,11 @@ public class BankAccountService implements IBankAccounService{
     public List<BankAccount> bankAccountList() {
         return bankAccountRepository.findAll();
     }
+
+    @Override
+    public Optional<Customer> findCustomerById(Long id) {
+        return customerRepository.findById(id);
+    }
+
+
 }

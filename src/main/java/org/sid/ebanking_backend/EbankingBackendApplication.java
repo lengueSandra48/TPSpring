@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -18,7 +19,7 @@ public class EbankingBackendApplication {
 
 	public static void main(String[] args) {SpringApplication.run(EbankingBackendApplication.class, args);}
 
-	@Bean
+	//@Bean
 	CommandLineRunner commandLineRunner(IBankAccounService bankAccounService){
 
         return args -> {
@@ -35,6 +36,7 @@ public class EbankingBackendApplication {
                 try {
                     bankAccounService.saveCurrentBankAccount(Math.random()*90000, 90000, customer.getId());
 					bankAccounService.saveSavingBankAccount(Math.random()*1000000, 100000, customer.getId());
+
 					List<BankAccount> bankAccounts = bankAccounService.bankAccountList();
 					for (BankAccount bankAccount:bankAccounts){
 						for (int i=0; i < 10; i++){
@@ -49,6 +51,8 @@ public class EbankingBackendApplication {
                 }
 
             });
+
+
 
 		};
     }
