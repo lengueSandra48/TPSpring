@@ -21,7 +21,7 @@ public class Customer {
     private String email;
 
     @OneToMany(mappedBy = "customer")  //relation bidirectionnelle// Quand je consulte un client, je n'ai pas forcement besoin de consulter la liste des comptes
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<BankAccount> bankAccounts; // un client peut avoir plusieurs comptes : relation one to many
 
 }
